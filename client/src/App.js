@@ -3,18 +3,28 @@ import StoreNav from './views/components/StoreNav';
 import { Route, Routes } from 'react-router-dom';
 import Home from './views/Home';
 import Products from './views/Products';
+import ShoppingCart from './views/ShoppingCart';
+import ProductDetail from './views/ProductDetail';
+import React, { useState } from 'react';
 
+export const CartContext = React.createContext(null);
 
 function App() {
+    const [cart, setCart] = useState([]);
+
     return (
         <div className='App'>
-            <StoreNav />
-            <div class="container">
-                <Routes>
-                    <Route path='/' element={<Home></Home>}></Route>
-                    <Route path='/produkter' element={<Products></Products>}></Route>
-                </Routes>
-            </div>        
+            <CartContext.Provider value={{cart: cart, setCart: setCart}}>
+                <StoreNav />
+                <div class="container">
+                    <Routes>
+                        <Route path='/' element={<Home></Home>}></Route>
+                        <Route path='/produkter' element={<Products></Products>}></Route>
+                        <Route path='/kundvagn' element={<ShoppingCart></ShoppingCart>}></Route>
+                        <Route path="/produkt/:id" element={<ProductDetail ></ProductDetail>}></Route>
+                    </Routes>
+                </div>
+            </CartContext.Provider>        
         </div>
     );
 }
