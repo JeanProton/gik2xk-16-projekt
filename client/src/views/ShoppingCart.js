@@ -24,7 +24,7 @@ function ShoppingCart() {
         <tbody>
           {cart && cart.length > 0 ? (
             cart.map((product, i) => {
-                totalPrice += product.price;
+              totalPrice += product.price;
               return (
                 <>
                   <tr key={i}>
@@ -41,7 +41,7 @@ function ShoppingCart() {
             <></>
           )}
           <tr>
-            <th>#</th>
+            <th></th>
             <td></td>
             <td></td>
             <td></td>

@@ -20,7 +20,12 @@ function Product({ product }) {
         <LinkContainer to={"/produkt/" + product.id}>
           <Button variant="primary">Detaljer</Button>
         </LinkContainer>
-        <Button variant="success" onClick={() => addProductToCart(product, cart)}>Lägg till i kundvagn</Button>
+        <Button
+          variant="success"
+          onClick={() => addProductToCart(product, cart)}
+        >
+          Lägg till i kundvagn
+        </Button>
       </Card.Body>
     </Card>
   );
@@ -40,7 +45,7 @@ function getRating(rating) {
 }
 
 function addProductToCart(product, cart) {
-    cart.push(product);
+  cart.push(product);
 }
 
 export default Product;

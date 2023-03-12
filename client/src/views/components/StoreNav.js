@@ -22,6 +22,9 @@ const StoreNav = () => {
             <LinkContainer to="/produkter">
               <Nav.Link>Produkter</Nav.Link>
             </LinkContainer>
+            <LinkContainer to="/administration">
+              <Nav.Link>Administration</Nav.Link>
+            </LinkContainer>
           </Nav>
           <Form className="d-flex">
             <LinkContainer to="/kundvagn">
