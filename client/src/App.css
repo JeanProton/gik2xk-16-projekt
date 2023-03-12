@@ -1,3 +1,8 @@
 .App-link {
-  color: #61dafb;
+  color: blue;
+}
+
+.App-link:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }

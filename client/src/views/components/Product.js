@@ -16,10 +16,12 @@ function Product({ product }) {
         <Card.Title>{product.title}</Card.Title>
         <div>{product.price}:-</div>
         {getRating(product.rating)}
-        <Card.Text>{product.description}</Card.Text>
-        <LinkContainer to={"/produkt/" + product.id}>
-          <Button variant="primary">Detaljer</Button>
-        </LinkContainer>
+        <Card.Text>
+          {product.description}
+          <LinkContainer to={"/produkt/" + product.id}>
+            <div className="App-link">...visa mer</div>
+          </LinkContainer>
+        </Card.Text>
         <Button
           variant="success"
           onClick={() => addProductToCart(product, cart)}
