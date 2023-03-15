@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define("user", {
+    return sequelize.define("users", {
         
         user_id: {
             type: DataTypes.INTEGER,
@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         email: {
             type: DataTypes.STRING(100),
             allowNull: false,
+            unique: true,
             validate: {
                 isEmail: true
             }

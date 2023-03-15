@@ -27,8 +27,8 @@ var server = http.createServer(app);
 
 const db = require('../models/');
 db.sequelize
-/*.sync()   Ta bort force:true när vi är klara med databasen.*/
-.sync({ force: true })
+.sync() 
+/*.sync({ force: true }) */
   .then(() => {
     server.listen(port, () => {
       console.log(`Server running on localhost:${port}`);
