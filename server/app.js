@@ -15,4 +15,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 
+/* 
+app.use('/posts', require('./routes/usersRoute'));*/
+
+
+
+
+
 module.exports = app;
