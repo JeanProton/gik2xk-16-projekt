@@ -1,5 +1,6 @@
 const router = require("express").Router();
-const db = require("../models");
+/* const db = require("../models"); */
+const productService = require("../services/productService");
 
 /*---------VALIDERING--------- */
 const validate = require("validate.js");
@@ -12,41 +13,39 @@ const constraints = {
 };
 
 /*-----------GET----------*/
+
 router.get("/", (req, res) => {
-  db.products.findAll().then((result) => {
-    res.send(result);
+  productService.getAll().then((result) => {
+    res.status(result.status).json(result.data);
   });
 });
+
 /*-----------CREATE/POST----------- */
+
 router.post("/", (req, res) => {
-  const invalidData = validate(req.body, constraints);
-  if (invalidData) {
-    res.status(400).json(invalidData);
-  } else {
-    db.products.create(req.body).then((result) => {
-      res.send(result);
-    });
-  }
+  const post = req.body;
+  productService.create(post).then((result) => {
+    res.status(result.status).json(result.data);
+  });
 });
+
 /* ----------UPDATE/PUT-----------*/
+
 router.put("/", (req, res) => {
-  db.products
-    .update(req.body, {
-      where: { id: req.body.id },
-    })
-    .then((result) => {
-      res.send(result);
-    });
+  const post = req.body;
+  const id = post.id;
+  productService.update(post, id).then((result) => {
+    res.status(result.status).json(result.data);
+  });
 });
+
 /*-----------DELETE----------- */
+
 router.delete("/", (req, res) => {
-  db.products
-    .destroy({
-      where: { id: req.body.id },
-    })
-    .then((result) => {
-      res.json("Produkten raderades");
-    });
+  const id = req.body.id;
+  productService.destroy(id).then((result) => {
+    res.status(result.status).json(result.data);
+  });
 });
 
 module.exports = router;
