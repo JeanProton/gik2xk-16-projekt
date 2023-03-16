@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const db = require("../models");
 const userService = require("../services/userService");
 
 /*-----------GET-----------------*/
