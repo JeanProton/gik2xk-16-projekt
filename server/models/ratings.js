@@ -6,7 +6,6 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             autoIncrement: true
         },
-
         rating: DataTypes.DOUBLE
     }, 
     {underscored: true}
