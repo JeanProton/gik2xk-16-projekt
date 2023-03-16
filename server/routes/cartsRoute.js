@@ -4,19 +4,19 @@ const db = require("../models");
 
 /*-----------GET----------*/
 router.get("/", (req, res) => {
-    db.carts.findAll().then((result) => {
+    db.cart.findAll().then((result) => {
         res.send(result);
     })
 });
 /*-----------CREATE/POST----------- */
 router.post("/", (req, res) => {
-    db.carts.create(req.body).then(result => {
+    db.cart.create(req.body).then(result => {
         res.send(result);
     });
 });
 /* ----------UPDATE/PUT-----------*/
 router.put("/", (req,res) => {
-    db.carts.update(req.body, {
+    db.cart.update(req.body, {
         where: { cart_id: req.body.id }
     })
     .then((result) => {
@@ -26,7 +26,7 @@ router.put("/", (req,res) => {
 });
 /*-----------DELETE----------- */
 router.delete("/", (req,res) => {
-    db.carts.destroy({
+    db.cart.destroy({
         where: { cart_id: req.body.id }
     })
     .then((result) => {

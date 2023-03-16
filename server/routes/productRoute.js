@@ -2,6 +2,17 @@ const router = require("express").Router();
 const db = require("../models");
 
 
+
+/*---------VALIDERING--------- */
+const validate = require("validate.js");
+const constraints = {
+  image_url: {
+    url: {
+        message: "^Sökvägen är felaktig"
+    }
+  },
+};
+
 /*-----------GET----------*/
 router.get("/", (req, res) => {
     db.products.findAll().then((result) => {
@@ -10,9 +21,15 @@ router.get("/", (req, res) => {
 });
 /*-----------CREATE/POST----------- */
 router.post("/", (req, res) => {
-    db.products.create(req.body).then(result => {
-        res.send(result);
-    });
+    const invalidData = validate(req.body, constraints);
+    if (invalidData) {
+        res.status(400).json(invalidData);
+    } else {
+        db.products.create(req.body).then(result => {
+            res.send(result);
+        });
+    }
+
 });
 /* ----------UPDATE/PUT-----------*/
 router.put("/", (req,res) => {

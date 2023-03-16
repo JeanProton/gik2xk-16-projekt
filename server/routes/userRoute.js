@@ -1,8 +1,3 @@
-/**-----------EJ KLAR, FATTAR IJNTE BOOLEAN----------------- */
-
-
-
-
 const router = require("express").Router();
 const db = require("../models");
 
@@ -19,7 +14,7 @@ const constraints = {
 
 
 
-/*------------------ VISA INNEHÅLL I USER DATABASEN----------*/
+/*-----------GET----------*/
 router.get("/", (req, res) => {
     db.users.findAll().then((result) => {
         res.send(result);
