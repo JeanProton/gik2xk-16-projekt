@@ -1,58 +1,37 @@
 const router = require("express").Router();
 const db = require("../models");
+const userService = require("../services/userService");
 
-/**Jämför ett objekt mot en uppsättning regler av et annat objekt  */
-const validate = require("validate.js");
-/*regler: */
-const constraints = {
-  email: {
-    email: {
-      message: 'Please enter a valid email address',
-    },
-  },
-};
-
-
-
-/*-----------GET----------*/
+/*-----------GET-----------------*/
 router.get("/", (req, res) => {
-    db.users.findAll().then((result) => {
-        res.send(result);
-    })
+  userService.getAll().then((result) => {
+    res.status(result.status).json(result.data);
+  });
 });
 
-/*-----------CREATE----------- */
+/*-----------CREATE/POST----------- */
 router.post("/", (req, res) => {
-    const invalidData = validate(req.body, constraints);
-    if(invalidData){
-        res.status(400).json(invalidData);
-    }   else {
-        db.users.create(req.body).then(result => {
-            res.send(result);
-        });
-    }
+  const post = req.body;
+  userService.create(post).then((result) => {
+    res.status(result.status).json(result.data);
+  });
 });
 
-/* ----------UPDATE-----------*/
-router.put("/", (req,res) => {
-    db.users.update(req.body, {
-        where: { user_id: req.body.id }
-    })    
-    .then((result) => {
-        res.send(result);
-
-    });
+/* ----------UPDATE/PUT-----------*/
+router.put("/", (req, res) => {
+  const post = req.body;
+  const id = post.id;
+  userService.update(post, id).then((result) => {
+    res.status(result.status).json(result.data);
+  });
 });
 
 /*-----------DELETE----------- */
-router.delete("/", (req,res) => {
-    db.users.destroy({
-        where: { user_id: req.body.id }
-    })
-    .then((result) => {
-        res.json("Användaren raderades");
-    });
+router.delete("/", (req, res) => {
+  const id = req.body.id;
+  userService.destroy(id).then((result) => {
+    res.status(result.status).json(result.data);
+  });
 });
-
 
 module.exports = router;
